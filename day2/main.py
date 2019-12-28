@@ -49,10 +49,9 @@ def read_opcode(opcode, noun, verb):
             break
         elif v==1:
             opcode_updated[opcode_updated[i+3]] = opcode_updated[opcode_updated[i+1]] + opcode_updated[opcode_updated[i+2]]
-            #print('added {:d} together with {:d}'.format(opcode_updated[opcode_updated[i+1]], opcode_updated[opcode_updated[i+2]]))
+
         elif v==2:
             opcode_updated[opcode_updated[i+3]] = opcode_updated[opcode_updated[i+1]] * opcode_updated[opcode_updated[i+2]]
-            #print('multiplied {:d} together with {:d}'.format(opcode_updated[opcode_updated[i+1]], opcode_updated[opcode_updated[i+2]]))
         i = i+4
     return opcode_updated[0]
 
@@ -60,13 +59,11 @@ def read_opcode(opcode, noun, verb):
 
 read_opcode(op,12,2)
 
-from itertools import combinations 
-alternatives = range(100)
-for a in list(combinations(alternatives, 2)):
-    if read_opcode(op_upd,a[0],a[1]) == 19690720:
-        print(a)
-        print('SUCCESS')
-        break
 
+for noun in range(100):
+    for verb in range(100):
+        if read_opcode(op_upd,noun, verb) == 19690720:
+            print('SUCCESS with noun: {:d}, and verb: {:d}, which gives us an answer of {:d}'.format(noun, verb, noun*100 + verb))
+            break
 
-
+            
